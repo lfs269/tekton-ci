@@ -21,6 +21,8 @@ spec:
   params:
   - name: repoUrl
     value: https://github.com/initcron/example-voting-app.git
+  - name: revision
+    value: master
   - name: sparseCheckoutDirectories
     value: /result/
   - name: imageUrl
