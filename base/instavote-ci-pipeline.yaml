@@ -119,7 +119,7 @@ spec:
     - name: IMAGE
       value: '$(params.imageUrl):$(params.revision)-$(tasks.misc.results.short-sha)-$(tasks.misc.results.current-ts)'
     - name: EXTRA_ARGS
-      value: "--skip-tls-verify"
+      value: ["--skip-tls-verify"]
   - name: verify-digest
     runAfter:
     - img-build-publish
