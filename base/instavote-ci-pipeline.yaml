@@ -93,16 +93,37 @@ spec:
         script: |
           #!/usr/bin/env zsh
           ls -R $(workspaces.source.path)/
+        resources: 
+          requests: 
+            memory: 64Mi 
+            cpu: 100m 
+          limits: 
+            memory: 128Mi 
+            cpu: 200m
       - name: print-date-unix-timestamp
         image: bash:latest
         script: |
           #!/usr/bin/env bash
           date +%s | tr -d '\n' |  tee $(results.current-ts.path)
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 100m
+          limits:
+            memory: 128Mi
+            cpu: 200m
       - name: shorten-commit-hash
         image: bash:latest
         script: |
           #!/usr/bin/env bash
           echo $(params.commit-hash) | cut -c -8 | tr -d '\n'|  tee $(results.short-sha.path)
+        resources:
+          requests:
+            memory: 64Mi
+            cpu: 100m
+          limits:
+            memory: 128Mi
+            cpu: 200m
   - name: img-build-publish
     taskRef:
       name: kaniko
@@ -119,7 +140,7 @@ spec:
     - name: IMAGE
       value: '$(params.imageUrl):$(params.revision)-$(tasks.misc.results.short-sha)-$(tasks.misc.results.current-ts)'
     - name: EXTRA_ARGS
-      value: "--skip-tls-verify"
+      value: [ "--skip-tls-verify" ]
   - name: verify-digest
     runAfter:
     - img-build-publish
