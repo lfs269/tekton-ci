@@ -2,10 +2,13 @@
 apiVersion: tekton.dev/v1beta1
 kind: PipelineRun
 metadata:
-  name: vote-ci
+  generateName: vote-ci
 spec:
   pipelineRef:
     name: instavote-ci
+  podTemplate:
+    securityContext:
+      fsGroup: 65532
   workspaces:
   - name: shared-data
     volumeClaimTemplate:
