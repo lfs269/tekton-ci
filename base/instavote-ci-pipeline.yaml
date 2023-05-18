@@ -146,7 +146,7 @@ spec:
     - img-build-publish
     params:
     - name: digest
-      value: $(tasks.img-build-publish.results.IMAGE-DIGEST)
+      value: $(tasks.img-build-publish.results.IMAGE_DIGEST)
     taskSpec:
       params:
       - name: digest
